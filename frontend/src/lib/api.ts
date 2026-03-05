@@ -17,7 +17,10 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (r) => r,
   (error) => {
-    if (error.response?.status === 401 && typeof window !== 'undefined') {
+    // Só redireciona para /login se o 401 vier de uma rota protegida,
+    // nunca da própria rota de login (evita loop de redirecionamento).
+    const isLoginEndpoint = error.config?.url?.includes('/auth/login')
+    if (error.response?.status === 401 && typeof window !== 'undefined' && !isLoginEndpoint) {
       clearAuth()
       window.location.href = '/login'
     }
