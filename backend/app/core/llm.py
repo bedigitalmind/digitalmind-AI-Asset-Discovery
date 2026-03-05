@@ -8,7 +8,8 @@ import logging
 from typing import Any
 from anthropic import AsyncAnthropic, APIError, RateLimitError
 
-from .config import settings
+from .config import get_settings
+settings = get_settings()
 
 logger = logging.getLogger(__name__)
 
