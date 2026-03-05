@@ -55,6 +55,7 @@ const ANALYST_STATUS_LABELS: Record<string, string> = {
 type ConnectorPlatform =
   | 'azure' | 'm365'
   | 'salesforce' | 'servicenow' | 'sap' | 'dynamics365'
+  | 'google_workspace' | 'aws' | 'gcp'
   | 'manual'
 
 interface ConnectorField { key: string; label: string; placeholder: string; secret?: boolean; hint?: string }
@@ -124,6 +125,34 @@ const CONNECTOR_TYPE_META: Record<ConnectorPlatform, ConnectorTypeMeta> = {
       { key: 'client_id',       label: 'Client ID',          placeholder: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' },
       { key: 'client_secret',   label: 'Client Secret',      placeholder: 'Credencial do App Registration', secret: true },
       { key: 'environment_url', label: 'Environment URL',    placeholder: 'https://myorg.crm.dynamics.com' },
+    ],
+  },
+  google_workspace: {
+    label: 'Google Workspace',
+    color: 'text-yellow-400',
+    hint: 'Service Account com permissões de leitura no Admin SDK. Descobre apps de IA instalados na organização.',
+    fields: [
+      { key: 'credentials_json', label: 'Service Account JSON', placeholder: 'Cole o conteúdo do credentials.json', secret: true },
+      { key: 'admin_email',      label: 'Admin E-mail',         placeholder: 'admin@seudominio.com' },
+    ],
+  },
+  aws: {
+    label: 'Amazon Web Services',
+    color: 'text-orange-400',
+    hint: 'IAM Role ou Access Key com permissão ReadOnly. Descobre SageMaker, Bedrock e Rekognition.',
+    fields: [
+      { key: 'access_key_id',     label: 'Access Key ID',     placeholder: 'AKIAIOSFODNN7EXAMPLE' },
+      { key: 'secret_access_key', label: 'Secret Access Key', placeholder: 'Chave secreta IAM', secret: true },
+      { key: 'region',            label: 'Region',            placeholder: 'us-east-1' },
+    ],
+  },
+  gcp: {
+    label: 'Google Cloud Platform',
+    color: 'text-green-400',
+    hint: 'Service Account com Viewer no projeto. Descobre Vertex AI, AI Platform e Cloud AI APIs.',
+    fields: [
+      { key: 'credentials_json', label: 'Service Account JSON', placeholder: 'Cole o conteúdo do credentials.json', secret: true },
+      { key: 'project_id',       label: 'Project ID',          placeholder: 'my-gcp-project-123' },
     ],
   },
   manual: {

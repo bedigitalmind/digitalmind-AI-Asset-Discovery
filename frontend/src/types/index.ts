@@ -56,7 +56,7 @@ export interface AuditLog {
 export interface Connector {
   id: number
   name: string
-  connector_type: 'azure' | 'm365' | 'google_workspace' | 'aws' | 'gcp' | 'manual'
+  connector_type: 'azure' | 'm365' | 'salesforce' | 'servicenow' | 'sap' | 'dynamics365' | 'google_workspace' | 'aws' | 'gcp' | 'manual'
   platform: string
   /** 'configured' | 'error' | 'disabled' */
   status: string
