@@ -110,7 +110,10 @@ export const listAssets = (workspaceId: number, params?: {
   analyst_status?: string
   skip?: number
   limit?: number
-}) => api.get(`/workspaces/${workspaceId}/assets`, { params }).then((r) => r.data)
+// O backend retorna { total, items } — extraímos apenas o array
+}) => api.get(`/workspaces/${workspaceId}/assets`, { params }).then((r) =>
+  Array.isArray(r.data) ? r.data : (r.data?.items ?? [])
+)
 
 export const updateAsset = (workspaceId: number, assetId: number, data: {
   analyst_status?: string
