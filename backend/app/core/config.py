@@ -24,7 +24,12 @@ class Settings(BaseSettings):
     MINIO_MAX_FILE_SIZE_MB: int = 500
 
     # CORS
-    ALLOWED_ORIGINS: list[str] = ["http://localhost:3000"]
+    ALLOWED_ORIGINS: list[str] = [
+        "http://localhost:3000",
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+        "http://127.0.0.1:3000",
+    ]
 
     # Anthropic Claude (ADR-009)
     ANTHROPIC_API_KEY: str = ""
